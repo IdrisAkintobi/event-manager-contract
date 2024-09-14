@@ -13,7 +13,7 @@ IDrisToken: check
 	forge script script/IDrisToken.s.sol --rpc-url lisk-sepolia --broadcast --verify
 
 EventManager: check
-	forge script script/EventManager.s.sol --rpc-url sepolia --broadcast --verify
+	forge script script/EventManager.s.sol --rpc-url lisk-sepolia --broadcast --verify
 
 IDrisToken-local: check
 	forge script script/IDrisToken.s.sol --rpc-url localhost --broadcast
