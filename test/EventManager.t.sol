@@ -33,24 +33,15 @@ contract EventNFTManagerTest is Test {
         deal(address(iDrisToken), eventNFTOwner, EVENT_CREATION_CHARGE);
 
         // Deploy the EventManager contract
-        eventManager = new EventManager(
-            address(iDrisToken),
-            EVENT_CREATION_CHARGE
-        );
+        eventManager = new EventManager(address(iDrisToken), EVENT_CREATION_CHARGE);
 
         // Start pranking as the eventNFTOwner to create the event manager and event
         vm.startPrank(eventNFTOwner);
         iDrisToken.approve(address(eventManager), EVENT_CREATION_CHARGE);
 
         // Create an event using EventManager
-        (, address eventAddress) = eventManager.createEventNFT(
-            eventNFTOwner,
-            eventName,
-            eventSymbol,
-            eventTicket,
-            eventEndDate,
-            maxAttendance
-        );
+        (, address eventAddress) =
+            eventManager.createEventNFT(eventNFTOwner, eventName, eventSymbol, eventTicket, eventEndDate, maxAttendance);
         vm.stopPrank();
 
         // Set the deployed EventNFT
@@ -82,12 +73,7 @@ contract EventNFTManagerTest is Test {
         }
 
         // Try to mint one more ticket and expect a revert
-        vm.expectRevert(
-            abi.encodeWithSelector(
-                EventNFT.MaxAttendanceReached.selector,
-                maxAttendance
-            )
-        );
+        vm.expectRevert(abi.encodeWithSelector(EventNFT.MaxAttendanceReached.selector, maxAttendance));
         eventNFT.mintTicket(eventNFTOwner);
         vm.stopPrank();
     }
@@ -109,9 +95,7 @@ contract EventNFTManagerTest is Test {
         eventNFT.useTicket(tokenId);
 
         // Check if the ticket is burned
-        vm.expectRevert(
-            abi.encodeWithSignature("ERC721NonexistentToken(uint256)", 1)
-        );
+        vm.expectRevert(abi.encodeWithSignature("ERC721NonexistentToken(uint256)", 1));
         eventNFT.ownerOf(tokenId);
     }
 

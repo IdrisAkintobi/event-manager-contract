@@ -39,10 +39,7 @@ contract EventNFT is ERC721URIStorage, EventNFTModifier {
         string memory _eventTicket,
         uint64 _eventEndDate,
         uint32 _maxAttendance
-    )
-        ERC721(_eventName, _eventSymbol)
-        EventNFTModifier(_eventOwner, _eventEndDate)
-    {
+    ) ERC721(_eventName, _eventSymbol) EventNFTModifier(_eventOwner, _eventEndDate) {
         if (_eventOwner == address(0)) revert AddressZeroDetected();
         if (_eventEndDate < block.timestamp) revert EventCanNotBeInThePast();
         eventTicket = _eventTicket;
@@ -68,16 +65,12 @@ contract EventNFT is ERC721URIStorage, EventNFTModifier {
         emit toggledEventIsOpen(eventIsOpen);
     }
 
-    function updateEventEndDate(
-        uint64 _newEventEndDate
-    ) external onlyOwner activeEvent {
+    function updateEventEndDate(uint64 _newEventEndDate) external onlyOwner activeEvent {
         if (block.timestamp > _newEventEndDate) revert EventCanNotBeInThePast();
         eventEndDate = _newEventEndDate;
     }
 
-    function useTicket(
-        uint256 _tokenId
-    ) public activeEvent isTicketHolder(_tokenId) {
+    function useTicket(uint256 _tokenId) public activeEvent isTicketHolder(_tokenId) {
         if (!eventIsOpen) revert EventsIsNotOpen();
         _burn(_tokenId);
 
@@ -86,10 +79,7 @@ contract EventNFT is ERC721URIStorage, EventNFTModifier {
         emit grantEventAccess(msg.sender);
     }
 
-    function transferTicket(
-        uint256 _tokenId,
-        address _to
-    ) external activeEvent {
+    function transferTicket(uint256 _tokenId, address _to) external activeEvent {
         safeTransferFrom(msg.sender, _to, _tokenId);
         ticketHolders[_tokenId] = _to;
 

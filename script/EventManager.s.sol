@@ -17,10 +17,7 @@ contract EventManagerScript is Script {
         vm.startBroadcast(vm.envUint("DO_NOT_LEAK"));
 
         // Deploy the contract
-        eventManager = new EventManager(
-            eventManagerToken,
-            EVENT_CREATION_CHARGE
-        );
+        eventManager = new EventManager(eventManagerToken, EVENT_CREATION_CHARGE);
 
         // Stop broadcasting
         vm.stopBroadcast();

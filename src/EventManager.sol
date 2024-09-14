@@ -32,20 +32,10 @@ contract EventManager {
     ) public returns (uint256 _index, address _deployedTo) {
         if (_eventOwner == address(0)) revert AddressZeroDetected();
         // Deduct charges to create an event from the event creator
-        eventManagerToken.transferFrom(
-            _eventOwner,
-            msg.sender,
-            eventCreationCharge
-        );
+        eventManagerToken.transferFrom(_eventOwner, msg.sender, eventCreationCharge);
 
-        EventNFT newEventNFT = new EventNFT(
-            _eventOwner,
-            _eventName,
-            _eventSymbol,
-            _eventTicket,
-            _eventEndDate,
-            _maxAttendance
-        );
+        EventNFT newEventNFT =
+            new EventNFT(_eventOwner, _eventName, _eventSymbol, _eventTicket, _eventEndDate, _maxAttendance);
 
         _deployedTo = address(newEventNFT);
         _index = ++noOfEvents;
