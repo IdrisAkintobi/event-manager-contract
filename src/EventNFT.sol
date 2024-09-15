@@ -27,7 +27,7 @@ contract EventNFT is ERC721URIStorage, EventNFTModifier {
      *
      * @param _eventName The name of the event
      * @param _eventSymbol The event symbol
-     * @param _eventTicket The ipfs hash of the event metadata of following the opensea token uri metadata standard.
+     * @param _eventTicket The ipfs hash of the event metadata, following the opensea token uri metadata standard.
      * ==> https://docs.opensea.io/docs/metadata-standards <==
      * @param _eventEndDate The end date of the event in unix epoch timestamp
      * @param _maxAttendance The number of maximum attandees of the event

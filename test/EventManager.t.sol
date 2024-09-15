@@ -48,6 +48,12 @@ contract EventNFTManagerTest is Test {
         eventNFT = EventNFT(eventAddress);
     }
 
+    function testUpdateEventCreationCharge() public {
+        eventManager.updateEventCreationCharge(2 gwei);
+        // Check if the event is creation charge is updated
+        assertEq(eventManager.eventCreationCharge(), 2 gwei);
+    }
+
     function testEventCreation() public view {
         // Check if the event is created
         assertEq(eventNFT.eventTicket(), eventTicket);
