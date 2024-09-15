@@ -2,7 +2,7 @@
 pragma solidity ^0.8.26;
 
 import "./EventNFT.sol";
-import "../interface/IERC20.sol";
+import "./interface/IERC20.sol";
 
 contract EventManager {
     address eventManagerOwner;
@@ -34,10 +34,20 @@ contract EventManager {
     ) public returns (uint256 _index, address _deployedTo) {
         if (_eventOwner == address(0)) revert AddressZeroDetected();
         // Deduct charges to create an event from the event creator
-        eventManagerToken.transferFrom(_eventOwner, eventManagerOwner, eventCreationCharge);
+        eventManagerToken.transferFrom(
+            _eventOwner,
+            eventManagerOwner,
+            eventCreationCharge
+        );
 
-        EventNFT newEventNFT =
-            new EventNFT(_eventOwner, _eventName, _eventSymbol, _eventTicket, _eventEndDate, _maxAttendance);
+        EventNFT newEventNFT = new EventNFT(
+            _eventOwner,
+            _eventName,
+            _eventSymbol,
+            _eventTicket,
+            _eventEndDate,
+            _maxAttendance
+        );
 
         _deployedTo = address(newEventNFT);
         _index = ++noOfEvents;
