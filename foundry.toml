@@ -11,7 +11,7 @@ remappings = ["@openzeppelin/=lib/openzeppelin-contracts/"]
 # Setting up RPC URLs and private keys for networks
 [rpc_endpoints]
 sepolia = "https://sepolia.infura.io/v3/${INFURA_API_KEY}"
-lisk-sepolia = "${LISK_RPC_URL}"
+lisk-sepolia = "${LISK_SEPOLIA_RPC_URL}"
 localhost = "${LOCALHOST}"
 
 # Etherscan API key for verification
